@@ -539,4 +539,4 @@ def toggle_modal(btn_xlsx, close, is_open):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=8080)
