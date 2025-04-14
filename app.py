@@ -1,5 +1,5 @@
-#Import des librairies : requests pour les requpetes a API et pandas qui est le couteau suisse pour la manipulation de données
 import requests
+from flask import Flask
 from shapely.geometry import shape, Point
 import shapely.wkt
 import dash_bootstrap_components as dbc
@@ -39,20 +39,14 @@ on_each_feature = assign("""function(feature, layer, context){
 
 AUTH_BEARER_INSEE = os.environ.get("AUTH_BEARER_INSEE")
 
-app = Dash(__name__)
+server = Flask(__name__)
+app = Dash(__name__, server=server)
 
-app.title = 'ADLC-ZDC'
+app.title = 'Isochrone app'
 
-#Token accès api insee valide pendant 41 000 jours
 headers_insee = {'Authorization': AUTH_BEARER_INSEE }
 
 nav = Navbar()
-
-app.title = 'ADLC-SEN'
-
-server = app.server
-app.scripts.config.serve_locally = True
-app.css.config.serve_locally = True
 
 icon = {
     "iconUrl": 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
